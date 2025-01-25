@@ -1,4 +1,13 @@
 print(r'''
+*******************************************************************************                                                                       
+  88                                                                       
+MM88MMM 8b,dPPYba,  ,adPPYba, ,adPPYYba, ,adPPYba, 88       88 8b,dPPYba,  
+  88    88P'   "Y8 a8P_____88 ""     `Y8 I8[    "" 88       88 88P'   "Y8  
+  88    88         8PP""""""" ,adPPPPP88  `"Y8ba,  88       88 88          
+  88,   88         "8b,   ,aa 88,    ,88 aa    ]8I "8a,   ,a88 88          
+  "Y888 88          `"Ybbd8"' `"8bbdP"Y8 `"YbbdP"'  `"YbbdP'Y8 88  
+  *******************************************************************************''')
+print(r'''
 *******************************************************************************
           |                   |                  |                     |
  _________|________________.=""_;=.______________|_____________________|_______
@@ -22,18 +31,18 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
 ''')
 print("Welcome to Treasure Island.")
 print("Your mission is to find the treasure.")
-First_choice = input("you want to move your boat to right[r] or left[l]?  ")
-if First_choice == "l":
+First_choice = input("you want to move your boat to right or left?  ").lower()
+if First_choice == "left":
     print("you have reached the shore of the Treasure Island!\nbut your boat is broken!")
-    Second_choice = input("you want to jump to water and swim[s] or wait[w]?  ")
-    if Second_choice == "w":
+    Second_choice = input("you want to jump to water and swim or wait?  ").lower()
+    if Second_choice == "wait":
         print("You have found another boat and landed into the Island!\nthen you have entered into a cave!")
-        Third_choice = input("which door would you open, red[r] or blue[b] or yellow[y]  ")
-        if Third_choice == "r":
+        Third_choice = input("which door would you open, red or blue or yellow  ").lower()
+        if Third_choice == "red":
             print("a Dragon was behind the door\nyou have been Burned by fire!\nGame Over.")
-        elif Third_choice == "b":
+        elif Third_choice == "bue":
             print("a wolf pack was behind the door!\nyou have been Eaten by beasts!\nGame Over.")
-        elif Third_choice == "y":
+        elif Third_choice == "yellow":
             print("Congratulations\nyou have beaten the Game!")
         else:
             print("Game Over.")
@@ -41,3 +50,4 @@ if First_choice == "l":
         print("Attacked by trout!\nGame Over!")
 else:
     print("you Fall into a hole.\nGame Over!!")
+          
