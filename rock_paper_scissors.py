@@ -38,30 +38,22 @@ game_moves = [rock, paper, scissors]
 
 computer_choice = random.choice(game_moves)
 
-if choice == 0 and computer_choice == game_moves[2]:
-    print("Your choice:\n")
-    print(game_moves[choice] + "\n")
-    print(f"computer\'s choice:\n{computer_choice}")
+# displaying moves:
+
+print("Your choice:\n" + game_moves[choice] + "\n")
+print(f"computer\'s choice:\n{computer_choice}")
+
+
+if choice == 0 and computer_choice == 2:
     print("you have won")
 
-elif choice == 1 and computer_choice == game_moves[0]:
-    print("Your choice:\n")
-    print(game_moves[choice] + "\n")
-    print(f"computer\'s choice:\n{computer_choice}")
+elif choice == 1 and computer_choice == 0:
     print("you have won")
 
-elif choice == 2 and computer_choice == game_moves[1]:
-    print("Your choice:\n")
-    print(game_moves[choice] + "\n")
-    print(f"computer\'s choice:\n{computer_choice}")
+elif choice == 2 and computer_choice == 1:
     print("you have won")
+
 elif game_moves[choice] == computer_choice:
-    print("Your choice:\n")
-    print(game_moves[choice] + "\n")
-    print(f"computer\'s choice:\n{computer_choice}")
     print("it\'a draw")
 else:
-    print("Your choice:\n")
-    print(game_moves[choice] + "\n")
-    print(f"computer\'s choice:\n{computer_choice}")
     print("you have lost")
