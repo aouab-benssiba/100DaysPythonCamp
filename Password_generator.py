@@ -28,6 +28,8 @@ digit_list = list(digit)
 
 random.shuffle(digit_list)
 
-digit = ''.join(digit_list)
-
+digit = ""
+for char in digit_list:
+    digit += char
+    
 print(f"Your password is: {digit}")
