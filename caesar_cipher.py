@@ -32,14 +32,12 @@ message = str(input("Type your message only letters:\n"))
 
 shift = int(input("Type the shift number:\n"))
 
-# defining our lists
-
-message_list = list(message)
-indexes_list = []
 
 # Function section:
 
 def encode():
+    message_list = list(message)
+    indexes_list = []
     # TODO 1: for each char in message_list,
     #  i want to extract it index in the letters list, and assign it to a indexes_list, for example: h his index is 7
     for char in message_list:
@@ -67,9 +65,16 @@ def encode():
 
     print("\n" + "Here's the encoded result: " + encoded_word)
 
+def reset1():
+    indexes_list = []
+    message_list = []
+    encode_list = []
+    encoded_word = ""
 
 
 def decode():
+    message_list = list(message)
+    indexes_list = []
     # TODO 1: for each char in message_list,
     #     #  i want to extract it index in the letters list, and assign it to a indexes_list, for example: h his index is 7
 
@@ -100,8 +105,25 @@ def decode():
 
     print("\n" + "Here's the decoded result: " + decoded_word)
 
+def reset2():
+    indexes_list = []
+    message_list = []
+    decode_list = []
+    decoded_word = ""
 
-if choice == "encode":
-    encode()
-elif choice == "decode":
-    decode()
+
+while True:
+    if choice == "encode":
+        encode()
+        reset1()
+    elif choice == "decode":
+        decode()
+        reset2()
+    answer = str(input("do you want to play again? y/[N]")).lower()
+    if answer != "y":
+        break
+    elif answer == "y":
+        choice = str(input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")).lower()
+        message = str(input("Type your message only letters:\n"))
+
+        shift = int(input("Type the shift number:\n"))
