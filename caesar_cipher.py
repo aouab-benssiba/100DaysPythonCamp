@@ -21,6 +21,7 @@ letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
 
 
 # Asking to fill up the needed variables
+
 try:
     choice = str(input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")).lower()
     if choice != "encode" and choice != "decode":
@@ -31,6 +32,7 @@ except ValueError as e:
 message = str(input("Type your message only letters:\n"))
 
 shift = int(input("Type the shift number:\n"))
+
 
 
 # Function section:
@@ -65,7 +67,7 @@ def encode():
 
     print("\n" + "Here's the encoded result: " + encoded_word)
 
-def reset1():
+def reset_encode():
     indexes_list = []
     message_list = []
     encode_list = []
@@ -105,7 +107,7 @@ def decode():
 
     print("\n" + "Here's the decoded result: " + decoded_word)
 
-def reset2():
+def reset_decode():
     indexes_list = []
     message_list = []
     decode_list = []
@@ -115,15 +117,22 @@ def reset2():
 while True:
     if choice == "encode":
         encode()
-        reset1()
+        reset_encode()
     elif choice == "decode":
         decode()
-        reset2()
+        reset_decode()
     answer = str(input("do you want to play again? y/[N]")).lower()
     if answer != "y":
         break
     elif answer == "y":
-        choice = str(input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")).lower()
+        try:
+            choice = str(input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")).lower()
+            if choice != "encode" and choice != "decode":
+                raise ValueError(f"you have misspelled {choice}.")
+        except ValueError as e:
+            print(f"Error: {e}")
+            exit()
         message = str(input("Type your message only letters:\n"))
 
         shift = int(input("Type the shift number:\n"))
+
