@@ -29,16 +29,28 @@ try:
 except ValueError as e:
     print(f"Error: {e}")
     exit()
-message = str(input("Type your message only letters:\n"))
+message = str(input("Type your message:\n"))
 
 shift = int(input("Type the shift number:\n"))
-
 
 
 # Function section:
 
 def encode():
     message_list = list(message)
+
+    # TODO : if the index of message_list is a number or a special character, it should be ignored
+    #  while it position is saved and called back again when it is encoded to it same position
+
+    outsiders_dic = {}
+    for char in message_list:
+        if char not in letters:
+            it_index = message_list.index(char)
+            outsiders_dic[it_index] = char
+
+    for char in list(message_list):
+        if char not in letters:
+            message_list.remove(char)
     indexes_list = []
     # TODO 1: for each char in message_list,
     #  i want to extract it index in the letters list, and assign it to a indexes_list, for example: h his index is 7
@@ -61,6 +73,8 @@ def encode():
         encode_list += letter
 
     # TODO 4: then make encode_list back to a word
+    for index, char in outsiders_dic.items():
+        encode_list.insert(index, char)
     encoded_word = ""
     for char in encode_list:
         encoded_word += char
@@ -76,6 +90,15 @@ def reset_encode():
 
 def decode():
     message_list = list(message)
+    outsiders_dic = {}
+    for char in message_list:
+        if char not in letters:
+            it_index = message_list.index(char)
+            outsiders_dic[it_index] = char
+
+    for char in list(message_list):
+        if char not in letters:
+            message_list.remove(char)
     indexes_list = []
     # TODO 1: for each char in message_list,
     #     #  i want to extract it index in the letters list, and assign it to a indexes_list, for example: h his index is 7
@@ -101,6 +124,8 @@ def decode():
         letter = letters[index]  # h
         decode_list += letter
     # TODO 4: then make encode_list back to a word
+    for index, char in outsiders_dic.items():
+        decode_list.insert(index, char)
     decoded_word = ""
     for char in decode_list:
         decoded_word += char
@@ -135,4 +160,3 @@ while True:
         message = str(input("Type your message only letters:\n"))
 
         shift = int(input("Type the shift number:\n"))
-
