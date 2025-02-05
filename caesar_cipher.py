@@ -15,9 +15,7 @@ a8"     "" 88 88P'    "8a 88P'    "8a a8P_____88 88P'   "Y8
               88           ''')
 
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-           'w', 'x', 'y', 'z',
-           'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-           'W', 'X', 'Y', 'Z']
+           'w', 'x', 'y', 'z']
 
 
 # Asking to fill up the needed variables
@@ -33,6 +31,7 @@ message = str(input("Type your message:\n"))
 
 shift = int(input("Type the shift number:\n"))
 
+total_letters = len(letters)
 
 # Function section:
 
@@ -43,120 +42,99 @@ def encode():
     #  while it position is saved and called back again when it is encoded to it same position
 
     outsiders_dic = {}
-    for char in message_list:
+    filtered_list = []
+    # using enumerate to get the indexes and mitigate errors when char replicates
+    for index, char in enumerate(message_list):
         if char not in letters:
-            it_index = message_list.index(char)
-            outsiders_dic[it_index] = char
+            outsiders_dic[index] = char
+        if char in letters:
+            filtered_list.append(char)
 
-    for char in list(message_list):
-        if char not in letters:
-            message_list.remove(char)
-    indexes_list = []
     # TODO 1: for each char in message_list,
     #  i want to extract it index in the letters list, and assign it to a indexes_list, for example: h his index is 7
-    for char in message_list:
+    indexes_list = []
+    for char in filtered_list:
         number = letters.index(char)  # 7
         indexes_list.append(number)
 
     # TODO 2: then add the shift number to each index in the indexes list
-    for i in indexes_list:
-        original_i = i  # 7
-        i += shift  # 8
-        original_index = indexes_list.index(original_i)  # 0
-        indexes_list[original_index] = i
+    for index, number in enumerate(indexes_list):
+        # using modulo to wrap up the shift back to the beginning
+        indexes_list[index] = (number + shift) % total_letters
 
     # TODO 3: then translate each index_number in indexes_list to it char in letters list, and assign them into encode_list
     encode_list = []
     for i in indexes_list:
-        index = i  # 8
-        letter = letters[index]  # i
-        encode_list += letter
+        encode_list += letters[i]
 
     # TODO 4: then make encode_list back to a word
     for index, char in outsiders_dic.items():
         encode_list.insert(index, char)
+
     encoded_word = ""
     for char in encode_list:
         encoded_word += char
 
     print("\n" + "Here's the encoded result: " + encoded_word)
 
-def reset_encode():
-    indexes_list = []
-    message_list = []
-    encode_list = []
-    encoded_word = ""
-
 
 def decode():
     message_list = list(message)
     outsiders_dic = {}
-    for char in message_list:
+    filtered_list = []
+    for index, char in enumerate(message_list):
         if char not in letters:
-            it_index = message_list.index(char)
-            outsiders_dic[it_index] = char
-
-    for char in list(message_list):
-        if char not in letters:
-            message_list.remove(char)
+            outsiders_dic[index] = char
+        if char in letters:
+            filtered_list.append(char)
     indexes_list = []
     # TODO 1: for each char in message_list,
     #     #  i want to extract it index in the letters list, and assign it to a indexes_list, for example: h his index is 7
 
-    for char in message_list:
+    for char in filtered_list:
         number = letters.index(char)  # 7
         indexes_list.append(number)
 
 
     # TODO 2: then subtract the shift number for each index in the indexes list
 
-    for i in indexes_list:
-        original_i = i  # 8
-        i -= shift  # 7
-        original_index = indexes_list.index(original_i)  # 0
-        indexes_list[original_index] = i
+    for index, number in enumerate(indexes_list):
+        # we are using modulo to wrap up the shift back to the beginning
+        indexes_list[index] = (number - shift) % total_letters
 
     # TODO 3: then translate each index_number in indexes_list to it char in letters list, and assign them into encode_list
 
     decode_list = []
     for i in indexes_list:
-        index = i  # 7
-        letter = letters[index]  # h
-        decode_list += letter
+        decode_list += letters[i]
     # TODO 4: then make encode_list back to a word
+
     for index, char in outsiders_dic.items():
         decode_list.insert(index, char)
+
     decoded_word = ""
     for char in decode_list:
         decoded_word += char
 
     print("\n" + "Here's the decoded result: " + decoded_word)
 
-def reset_decode():
-    indexes_list = []
-    message_list = []
-    decode_list = []
-    decoded_word = ""
-
 
 while True:
     if choice == "encode":
         encode()
-        reset_encode()
     elif choice == "decode":
         decode()
-        reset_decode()
     answer = str(input("do you want to play again? y/[N]")).lower()
     if answer != "y":
         break
-    elif answer == "y":
-        try:
-            choice = str(input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")).lower()
-            if choice != "encode" and choice != "decode":
-                raise ValueError(f"you have misspelled {choice}.")
-        except ValueError as e:
-            print(f"Error: {e}")
-            exit()
-        message = str(input("Type your message only letters:\n"))
 
-        shift = int(input("Type the shift number:\n"))
+    try:
+        choice = str(input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")).lower()
+        if choice != "encode" and choice != "decode":
+            raise ValueError(f"you have misspelled {choice}.")
+    except ValueError as e:
+        print(f"Error: {e}")
+        exit()
+    message = str(input("Type your message:\n"))
+
+    shift = int(input("Type the shift number:\n"))
